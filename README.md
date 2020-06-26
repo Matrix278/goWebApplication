@@ -14,7 +14,8 @@ Libraries:
 - github.com/lib/pq
 
 DB Table data:
-```CREATE TABLE customers (
+```
+CREATE TABLE customers (
     id SERIAL PRIMARY KEY,
     firstname TINYTEXT,
     lastname TINYTEXT,
@@ -36,6 +37,6 @@ DB Table data:
 Routes:
 1. localhost:8080/api/customer/{id}, GET CUSTOMER ( GET )
 2. localhost:8080/api/customer, GET ALL CUSTOMERS ( GET )
-3. localhost:8080/api/newcustomer, CREATE CUSTOMER( POST )
+3. localhost:8080/api/newcustomer, CREATE CUSTOMER ( POST )
 4. localhost:8080/api/customer/{id}, UPDATE CUSTOMER BY ID ( PUT )
 5. localhost:8080/api/deletecustomer/{id}, DELETE CUSTOMER BY ID ( DELETE )
