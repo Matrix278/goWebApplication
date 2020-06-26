@@ -1,4 +1,4 @@
-module go-postgres
+module goWebApplication
 
 go 1.14
 
