@@ -1,7 +1,9 @@
 # GoWebApplication
+
 Simple web application having CRUD operations under customer object
 
-Technologies:
+### Technologies:
+
 - Go language
 - PostgreSQL DB
 - HTML
@@ -9,11 +11,21 @@ Technologies:
 - JS
 - Bootstrap 4
 
-Libraries:
+### Libraries:
+
 - github.com/gorilla/mux
 - github.com/lib/pq
 
-DB Table data:
+### PSQL DataBase data:
+
+host: localhost
+port: 5432
+user: martin
+password: qweasdzxc
+DB name: application
+
+### Table data:
+
 ```
 CREATE TABLE customers (
     id SERIAL PRIMARY KEY,
@@ -30,11 +42,12 @@ CREATE TABLE customers (
 
 2. (MIDDLEWARE folder) The **middleware** package is the bridge between APIs and Database. This package will handle all the db operations like Insert, Select, Update, and Delete (CRUD).
 
-3. (ROUTER folder) In the **router** package we will define all the api endpoints.
+3. (ROUTER folder) In the **router** package defines all the api endpoints.
 
 4. (MAIN file) The **main.go** is server. It will start a server on **8080** port and serve all the **Router**.
 
-Routes:
+### Routes:
+
 1. localhost:8080/api/customer/{id}, GET CUSTOMER ( GET )
 2. localhost:8080/api/customer, GET ALL CUSTOMERS ( GET )
 3. localhost:8080/api/newcustomer, CREATE CUSTOMER ( POST )
