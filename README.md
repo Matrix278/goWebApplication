@@ -18,11 +18,11 @@ Simple web application having CRUD operations under customer object
 
 ### PSQL DataBase data:
 
-host: localhost
-port: 5432
-user: martin
-password: qweasdzxc
-DB name: application
+- host: localhost
+- port: 5432
+- user: martin
+- password: qweasdzxc
+- DB name: application
 
 ### Table data:
 
