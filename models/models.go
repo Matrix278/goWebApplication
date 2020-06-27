@@ -2,7 +2,7 @@ package models
 
 import "time"
 
-// User schema of the user table
+// Customer schema of the customer table
 type Customer struct {
     ID	int64	`json:"id"`
     FirstName	string	`json:"firstname"`
