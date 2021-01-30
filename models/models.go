@@ -4,7 +4,7 @@ import "time"
 
 // Customer schema of the customer table
 type Customer struct {
-	ID        int64     `json:"id"`
+	ID        int       `json:"id"`
 	FirstName string    `json:"firstname"`
 	LastName  string    `json:"lastname"`
 	BirthDate time.Time `json:"birthdate"`
