@@ -2,7 +2,11 @@ package middleware
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
+	"goWebApplication/models"
+	"log"
+	"net/http"
 
 	_ "github.com/lib/pq" // postgres golang driver
 )
@@ -27,19 +31,79 @@ func createConnection() *sql.DB {
 
 	// Open the connection
 	db, err := sql.Open("postgres", psqlInfo)
-
 	if err != nil {
 		panic(err)
 	}
 
-	// check the connection
+	// Check the connection
 	err = db.Ping()
-
 	if err != nil {
 		panic(err)
 	}
 
 	fmt.Println("Successfully connected!")
-	// return the connection
 	return db
+}
+
+// GetAllCustomers will return all the customers
+func GetAllCustomers(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Context-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	// get all the users in the db
+	customers, err := getAllCustomers()
+	if err != nil {
+		log.Fatalf("Unable to get all customers. %v", err)
+	}
+
+	// send all the users as response
+	json.NewEncoder(w).Encode(customers)
+}
+
+//private
+func getAllCustomers() ([]models.Customer, error) {
+	// create the postgres db connection
+	db := createConnection()
+
+	// close the db connection
+	defer db.Close()
+
+	var customers []models.Customer
+
+	// create the select sql query
+	sqlStatement := `SELECT * FROM customers`
+
+	// execute the sql statement
+	rows, err := db.Query(sqlStatement)
+	if err != nil {
+		log.Fatalf("Unable to execute the query. %v", err)
+	}
+
+	// close the statement
+	defer rows.Close()
+
+	// iterate over the rows
+	for rows.Next() {
+		var customer models.Customer
+
+		// unmarshal the row object to customer
+		err = rows.Scan(
+			&customer.ID,
+			&customer.FirstName,
+			&customer.LastName,
+			&customer.BirthDate,
+			&customer.Gender,
+			&customer.Email,
+			&customer.Address,
+		)
+		if err != nil {
+			log.Fatalf("Unable to scan the row. %v", err)
+		}
+
+		// append the customer in the customers slice
+		customers = append(customers, customer)
+
+	}
+
+	return customers, err
 }
