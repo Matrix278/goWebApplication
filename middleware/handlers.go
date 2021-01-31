@@ -4,9 +4,10 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	"goWebApplication/models"
 	"log"
 	"net/http"
+	"text/template"
+	"wallesterTestApp/models"
 
 	_ "github.com/lib/pq" // postgres golang driver
 )
@@ -58,6 +59,26 @@ func GetAllCustomers(w http.ResponseWriter, r *http.Request) {
 
 	// send all the users as response
 	json.NewEncoder(w).Encode(customers)
+}
+
+func HomePageHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
+		return
+	}
+
+	ts, err := template.ParseFiles("./templates/index.tmpl")
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, "Internal Server Error", 500)
+		return
+	}
+
+	err = ts.Execute(w, nil)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, "Internal Server Error", 500)
+	}
 }
 
 //private

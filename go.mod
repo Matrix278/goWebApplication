@@ -1,4 +1,4 @@
-module goWebApplication
+module wallesterTestApp
 
 go 1.14
 

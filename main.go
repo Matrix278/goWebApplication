@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
-	"goWebApplication/router"
 	"log"
 	"net/http"
+	"wallesterTestApp/router"
 )
 
 func main() {
 	r := router.Router()
+
 	fmt.Println("Starting server on the port 8080...")
 
 	log.Fatal(http.ListenAndServe(":8080", r))
