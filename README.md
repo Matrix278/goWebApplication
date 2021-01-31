@@ -1,6 +1,5 @@
-# GoWebApplication
-
-Simple web application having CRUD operations under customer object
+# Wallester test
+Web application having CRUD operations under customer object
 
 ### Technologies:
 
